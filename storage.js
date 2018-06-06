@@ -64,19 +64,32 @@ const roomba = {
     description: "This robotic vacuum cleaner is great because I own dogs and hate to vacuum."
 }
 
-
-HomeInventoryDatabase.electronics.push(recordPlayer)
-HomeInventoryDatabase.electronics.push(referenceMonitors)
-HomeInventoryDatabase.electronics.push(television)
-HomeInventoryDatabase.electronics.push(amazonEcho)
-HomeInventoryDatabase.electronics.push(roomba)
-HomeInventoryDatabase.furniture.push(couch)
-HomeInventoryDatabase.furniture.push(ikeaTable)
-HomeInventoryDatabase.instruments.push(octatrack)
-HomeInventoryDatabase.instruments.push(synthesizer)
-HomeInventoryDatabase.instruments.push(guitar)
+HomeInventoryDatabase.electronics.push(amazonEcho, roomba, television, referenceMonitors, recordPlayer)
+HomeInventoryDatabase.furniture.push(couch, ikeaTable)
+HomeInventoryDatabase.instruments.push(octatrack, synthesizer, guitar)
 
 
+const saveDatabase = function (databaseObject, localStorageKey) {
+    /*
+        Convert the Object into a string.
+    */
+    const stringifiedDatabase = JSON.stringify(databaseObject)
 
+    /*
+        Create a key in local storage, and store the string
+        version of your inventory database as the value
+    */
+    localStorage.setItem(localStorageKey, stringifiedDatabase)
+}
+
+const loadDatabase = function (localStorageKey) {
+    // Get the string version of the database
+    const databaseString = localStorage.getItem(localStorageKey)
+
+    // Use JSON.parse() to convert the string back into an object
+    return JSON.parse(databaseString)
+}
+
+saveDatabase(HomeInventoryDatabase, "HomeInventory")
 
 
